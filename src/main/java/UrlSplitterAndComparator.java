@@ -18,13 +18,28 @@ public class UrlSplitterAndComparator {
                     URL url = new URL(exampleUrl);
                     long startTime = System.nanoTime();
                     for (int retriesCount = 0; retriesCount <= 10000; retriesCount++) {
+                        States states = States.READ;
+                        switch (states) {
+                            case READ:
+                            case PROTOCOL:
+                                url.getProtocol();
+                            case HOST:
+                                url.getHost();
+                            case PORT:
+                                url.getPort();
+                            case PATH:
+                                url.getPath();
+                            case QUERY:
+                                url.getQuery();
+                        }
                         if (retriesCount == 10000) {
                             long endTime = System.nanoTime();
                             System.out.println(url.getProtocol());
                             System.out.println(url.getHost());
                             System.out.println(url.getPort());
                             System.out.println(url.getPath());
-                            System.out.println("Splitted by URL: " + (endTime - startTime) / 1000 + "ms");
+                            System.out.println(url.getQuery());
+                            System.out.println("Split by URL parser and state machine: " + (endTime - startTime) / 1000 + "ms");
                         }
                     }
                 } catch (MalformedURLException murle) {
@@ -48,18 +63,12 @@ public class UrlSplitterAndComparator {
                                 System.out.println(str);
                             }
                             long endTime = System.nanoTime();
-                            System.out.println("Splitted by Regex: " + (endTime - startTime) / 1000 + "ms");
+                            System.out.println("Split by Regex: " + (endTime - startTime) / 1000 + "ms");
                         }
                     }
                 } catch (Exception e) {
                     e.getCause().printStackTrace();
                 }
-            }
-        });
-
-        Thread t3 = new Thread(new Runnable() {
-            public void run() {
-
             }
         });
 
