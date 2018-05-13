@@ -32,16 +32,16 @@ public class UrlSplitterAndComparator {
                             case QUERY:
                                 url.getQuery();
                         }
-                        if (retriesCount == 10000) {
-                            long endTime = System.nanoTime();
-                            System.out.println(url.getProtocol());
-                            System.out.println(url.getHost());
-                            System.out.println(url.getPort());
-                            System.out.println(url.getPath());
-                            System.out.println(url.getQuery());
-                            System.out.println("Split by URL parser and state machine: " + (endTime - startTime) / 1000 + "ms");
-                        }
                     }
+
+                    long endTime = System.nanoTime();
+                    System.out.println(url.getProtocol());
+                    System.out.println(url.getHost());
+                    System.out.println(url.getPort());
+                    System.out.println(url.getPath());
+                    System.out.println(url.getQuery());
+                    System.out.println("Split by URL parser and state machine: " + (endTime - startTime) / 1000 + "ms");
+
                 } catch (MalformedURLException murle) {
                     murle.getCause().printStackTrace();
                 }
